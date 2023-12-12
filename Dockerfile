@@ -1,7 +1,8 @@
 FROM maven:3.8.4 AS build
 WORKDIR /app
 COPY . /app
-RUN MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=128m" mvn clean package -DskipTests
+RUN MAVEN_OPTS="-Xmx512m -XX:MaxMetaspaceSize=128m" mvn clean package -DskipTests
+
 
 # 第二階段: 使用 OpenJDK 運行
 FROM openjdk:11
