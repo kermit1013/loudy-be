@@ -31,10 +31,10 @@ public class SocketModule {
     }
 
     private DataListener<Project> projectGet() {
-        return (senderClient, data, ackSender) -> {
-            senderClient.getNamespace().getRoomOperations(data.getRoom()).sendEvent("project_retrieved",
-                    projectService.projectToJsonString(projectService.getOrCreateByDefaultValues(data.getRoom())));
-        };
+        return (senderClient, data, ackSender) -> senderClient.getNamespace().getRoomOperations(data.getRoom())
+                .sendEvent("project_retrieved",
+                projectService.projectToJsonString(projectService.getOrCreateByDefaultValues(data.getRoom()))
+                );
     }
 
     private DataListener<Project> projectSave() {
